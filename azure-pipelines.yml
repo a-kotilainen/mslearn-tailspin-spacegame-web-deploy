@@ -22,7 +22,7 @@ stages:
 
     steps:
     - task: UseDotNet@2
-      displayName: 'Use .NET Core SDK $(dotnetSdkVersion)'
+      displayName: 'Use .NET SDK $(dotnetSdkVersion)'
       inputs:
         version: '$(dotnetSdkVersion)'
 
@@ -74,7 +74,7 @@ stages:
     (
       succeeded(),
       eq(variables['Build.SourceBranchName'], variables['releaseBranchName'])
-    ) 
+    )
   jobs:
   - deployment: Deploy
     pool:
@@ -92,5 +92,6 @@ stages:
             displayName: 'Azure App Service Deploy: website'
             inputs:
               azureSubscription: 'Resource Manager - Tailspin - Space Game'
-              appName: '$(tailspin-space-game-web-dev-25416)'
+              appName: '$(WebAppNameDev)'
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
+              
